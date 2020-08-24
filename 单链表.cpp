@@ -1,7 +1,7 @@
 using namespace std;
 #include<iostream>
 #define endl '\n'
-//ÊµÏÖÁ´±íµÄ±éÀú²åÈëºÍÉ¾³ı²Ù×÷ 
+//å®ç°é“¾è¡¨çš„éå†æ’å…¥å’Œåˆ é™¤æ“ä½œ 
 struct Node{
 	int data;
 	Node *next;
@@ -10,20 +10,23 @@ class LinkList{
 	private:
 		Node *head;
 	public:
-		LinkList(){};
+		LinkList();
 		~LinkList();
-		void CreateList1(int n);//Í·²å·¨ 
-		void CreateList2(int n);//Î²²å·¨ 
-		void ListInsert(int i,int e);//²åÈëÔªËØeµ½µÚi¸öÎ»ÖÃ 
-		void ListDelete(int n);//É¾³ıµÚn¸öÔªËØ 
-		int GetElem(int i);//»ñÈ¡µÚi¸öÔªËØ 
+		void CreateList1(int n);//å¤´æ’æ³• 
+		void CreateList2(int n);//å°¾æ’æ³• 
+		void ListInsert(int i,int e);//æ’å…¥å…ƒç´ eåˆ°ç¬¬iä¸ªä½ç½® 
+		void ListDelete(int n);//åˆ é™¤ç¬¬nä¸ªå…ƒç´  
+		int GetElem(int i);//è·å–ç¬¬iä¸ªå…ƒç´  
 		void GetList();
-		int ListLength();//»ñÈ¡Á´±íµÄ³¤¶È 
+		int ListLength();//è·å–é“¾è¡¨çš„é•¿åº¦ 
 };
+LinkList::LinkList(){
+	head=0;
+}
 void LinkList::CreateList1(int n){
 	Node *p,*q;
 	head=0;
-	cout<<"ÇëÒÀ´ÎÊäÈë"<<n<<"¸öÊı¾İÔªËØÖµ:"<<endl;
+	cout<<"è¯·ä¾æ¬¡è¾“å…¥"<<n<<"ä¸ªæ•°æ®å…ƒç´ å€¼:"<<endl;
 	for(int i=0;i<n;i++){
 		p=head;
 		q=new Node;
@@ -35,13 +38,21 @@ void LinkList::CreateList1(int n){
 void LinkList::CreateList2(int n){
 	Node *p,*q;
 	p=head;
-	cout<<"ÇëÒÀ´ÎÊäÈë"<<n<<"¸öÊı¾İÔªËØÖµ:"<<endl;
+	cout<<"è¯·ä¾æ¬¡è¾“å…¥"<<n<<"ä¸ªæ•°æ®å…ƒç´ å€¼:"<<endl;
 	for(int i=0;i<n;i++){
-		q=new Node;
-		cin>>q->data;
-		q->next=0;
-		p->next=q;
-		p=q;
+		if(i==0){
+			p=new Node;
+			cin>>p->data;
+			p->next=0;
+			head=p;
+		}
+		else{
+			q=new Node;
+			cin>>q->data;
+			q->next=0;
+			p->next=q;
+			p=q;
+		}
 	}
 }
 void LinkList::ListInsert(int i,int e){
@@ -123,8 +134,18 @@ int main(){
 	list1.GetList();
 	list1.ListInsert(2,999);
 	list1.GetList();
-	cout<<"Á´±íµÄ³¤¶È£º"<<list1.ListLength()<<endl;
+	cout<<"é“¾è¡¨çš„é•¿åº¦ï¼š"<<list1.ListLength()<<endl;
 	list1.ListDelete(2);
 	list1.GetList();
+	cout<<"****************************************"<<endl;
+	LinkList list2;
+	list2.CreateList2(6);
+	cout<<list2.GetElem(4)<<endl;
+	list2.GetList();
+	list2.ListInsert(2,999);
+	list2.GetList();
+	cout<<"é“¾è¡¨çš„é•¿åº¦ï¼š"<<list2.ListLength()<<endl;
+	list2.ListDelete(2);
+	list2.GetList();
 	return 0;
 }
